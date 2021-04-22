@@ -1,19 +1,20 @@
 package Sistema;
 
-import Estructuras.ListaDobleUsuario;
+import Estructuras.AbbUsuario;
 import Retorno.Retorno;
 
 public class Sistema implements ISistema{
 
-    private ListaDobleUsuario usuarios;
+    private AbbUsuario usuarios;
     private int maxPuntos;
     
     
     @Override
     public Retorno inicializarSistema(int maxPuntos) {
-        Retorno retorno = new Retorno(Retorno.Resultado.OK);
+        Retorno retorno = new Retorno();
+        retorno.resultado = retorno.resultado.OK;
         if(maxPuntos > 0) {
-           this.usuarios = new ListaDobleUsuario();
+           this.usuarios = new AbbUsuario();
            this.maxPuntos = maxPuntos;
         }else {
             retorno.resultado = retorno.resultado.ERROR_1;
@@ -24,7 +25,8 @@ public class Sistema implements ISistema{
 
     @Override
     public Retorno destruirSistema() {
-        Retorno retorno = new Retorno(Retorno.Resultado.OK);
+        Retorno retorno = new Retorno();
+        retorno.resultado = retorno.resultado.OK;
         this.maxPuntos = 0;
         this.usuarios = null;
         return retorno;
@@ -33,23 +35,36 @@ public class Sistema implements ISistema{
     @Override
     public Retorno registrarUsuario(String cedula, String nombre) {
         //validar cedula.
-        Retorno existeUsuario = buscarUsuario(cedula);
-        return null;
+        //Retorno existeUsuario = buscarUsuario(cedula);
+        Retorno retorno = new Retorno();
+        retorno.resultado = retorno.resultado.OK;
+        boolean inserto = usuarios.insertar(cedula, nombre);
+        if (inserto) {
+            return retorno;
+        }
+        return retorno;
     }
 
-    @Override
+   /*@Override
     public Retorno buscarUsuario(String cedula) {
         Retorno retorno = new Retorno(Retorno.Resultado.OK);
         //implementarlo el finde que viene.
         return null;
     }
-
+    */
     @Override
     public Retorno listarUsuarios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Retorno retorno = new Retorno();
+        if (usuarios.getRaiz() != null) {
+            retorno.valorString = usuarios.listar();
+            return retorno;
+        }
+        retorno.resultado = retorno.resultado.ERROR_1;
+        retorno.valorString = "No existen usuarios";
+        return retorno;
     }
 
-    @Override
+    /*@Override
     public Retorno registrarEstacion(Double coordX, Double coordY, String nombre) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -60,7 +75,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno evacuacionEmergencia(Double coordXi, Double coordYi, Radio metros) {
+    public Retorno evacuacionEmergencia(Double coordXi, Double coordYi, int metros) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -73,5 +88,5 @@ public class Sistema implements ISistema{
     public Retorno dibujarMapa() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    */
 }
