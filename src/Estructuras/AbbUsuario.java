@@ -58,9 +58,7 @@ public class AbbUsuario {
     private String listar(NodoAbbUsuario nodo) {
         String texto = "";
         if (nodo != null){
-            listar(nodo.getIzq());
-            texto += nodo.getCedula() + ";" + nodo.getNombre() + "|";
-            listar(nodo.getDer());
+            texto += listar(nodo.getIzq()) + nodo.getCedula() + ";" + nodo.getNombre() + "|" + listar(nodo.getDer());
         }
         return texto;
     }

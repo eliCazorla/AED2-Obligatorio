@@ -10,6 +10,9 @@ public class Obligatorio {
         //System.out.println("destruirSistema: " + sistema.destruirSistema().resultado);
         System.out.println("registrarUsuario: " + sistema.registrarUsuario("0.123.456-5","Usuario1").resultado);
         System.out.println("registrarUsuario: " + sistema.registrarUsuario("1.123.456-5","Usuario2").resultado);
+        //System.out.println("registrarUsuario: " + sistema.registrarUsuario("3.123.456-5","Usuario4").resultado);
+        System.out.println("registrarUsuario: " + sistema.registrarUsuario("5.123.456-5","Usuario3").resultado);
+        System.out.println("registrarUsuario: " + sistema.registrarUsuario("3.123.456-5","Usuario4").resultado);
         System.out.println("listarUsuarios: " + sistema.listarUsuarios().valorString);    
     }
     
