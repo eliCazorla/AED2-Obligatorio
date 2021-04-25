@@ -6,7 +6,7 @@ public interface ISistema {
     Retorno inicializarSistema (int maxPuntos);
     Retorno destruirSistema();
     Retorno registrarUsuario(String cedula, String nombre);
-    //Retorno buscarUsuario(String cedula);
+    Retorno buscarUsuario(String cedula);
     Retorno listarUsuarios();
     /*Retorno registrarEstacion(Double coordX, Double coordY, String nombre);
     Retorno registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int metros, int minutos);

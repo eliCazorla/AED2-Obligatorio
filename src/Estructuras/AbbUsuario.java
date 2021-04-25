@@ -62,5 +62,74 @@ public class AbbUsuario {
         }
         return texto;
     }
+
+    public int pertenece(String cedula) {
+        if (this.raiz == null) {
+            return -1;
+        }
+        return pertenece(this.raiz,cedula,0);
+    }
     
+    /*private int pertenece(NodoAbbUsuario nodo, String cedula){
+        int veces = 0;
+        if (nodo == null) {
+            return Integer.MIN_VALUE;
+        }
+        if (nodo.getCedula() == cedula){
+            return veces;
+        }
+        else{
+            if (compararValor(cedula, nodo.getCedula())) {
+                veces++;
+                veces += pertenece(nodo.getIzq(),cedula);
+            }
+            else{
+                veces++;
+                veces += pertenece(nodo.getDer(),cedula);
+            }
+        }
+        return veces;
+    }*/
+    
+    private int pertenece(NodoAbbUsuario nodo, String cedula, int veces){
+        if (nodo == null) {
+            return -1;
+        }
+        if (nodo.getCedula() == cedula){
+            return veces;
+        }
+        else{
+            if (compararValor(cedula, nodo.getCedula())) {
+                return pertenece(nodo.getIzq(),cedula,veces++);
+            }
+            else{
+                return pertenece(nodo.getDer(),cedula,veces++);
+            }
+        }
+    }
+
+    public String buscarPorCedula(String cedula) {
+        if (this.raiz == null) {
+            return "No hay usuarios.";
+        }
+        return buscarPorCedula(this.raiz,cedula);
+    }
+    
+    
+    public String buscarPorCedula(NodoAbbUsuario nodo, String cedula) {
+        String texto = "";
+        if (nodo.getCedula() == cedula){
+            texto = nodo.getCedula() + ";" + nodo.getNombre();
+        }
+        else{
+            if (compararValor(cedula, nodo.getCedula())) {
+               texto += buscarPorCedula(nodo.getIzq(),cedula);
+            }
+            else{
+               texto += buscarPorCedula(nodo.getDer(),cedula);
+            }
+        }
+        return texto;
+    }
+  
 }

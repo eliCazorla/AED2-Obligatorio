@@ -45,13 +45,24 @@ public class Sistema implements ISistema{
         return retorno;
     }
 
-   /*@Override
+   @Override
     public Retorno buscarUsuario(String cedula) {
-        Retorno retorno = new Retorno(Retorno.Resultado.OK);
-        //implementarlo el finde que viene.
-        return null;
+        Retorno retorno = new Retorno();
+        /*if (!validarCedula(cedula)) {
+           retorno.resultado = retorno.resultado.ERROR_1;
+        }*/
+        retorno.resultado = retorno.resultado.ERROR_2;
+        retorno.valorString = "El usuario no está registrado.";
+        int pertenece = usuarios.pertenece(cedula);
+        if (pertenece >= 0) {
+           retorno.resultado = retorno.resultado.OK;
+           String usuario = usuarios.buscarPorCedula(cedula);
+           retorno.valorString = usuario;
+        }
+        retorno.valorEntero = pertenece;
+        return retorno;
     }
-    */
+    
     @Override
     public Retorno listarUsuarios() {
         Retorno retorno = new Retorno();
