@@ -20,7 +20,6 @@ public class GrafoMetro {
         }
     }
     
-    
     public Via[][] getMatrizAdy() {
         return matrizAdy;
     }
@@ -52,6 +51,14 @@ public class GrafoMetro {
     public void setCantEstaciones(int cantEstaciones) {
         this.cantEstaciones = cantEstaciones;
     }    
+
+    public boolean estaEstacion(Double coordX, Double coordY) {
+        for (int i = 1; i <= cantEstaciones; i++) {
+            if (true) {
+                
+            }
+        }
+    }
    
     
 }

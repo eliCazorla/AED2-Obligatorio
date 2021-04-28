@@ -4,6 +4,7 @@ public class Estacion {
     private String nombre;
     private double coordX;
     private double coordY;
+    private int codigo; //posicion en el vector;
 
     public Estacion(String nombre, double coordX, double coordY) {
         this.nombre = nombre;
