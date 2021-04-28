@@ -1,5 +1,6 @@
 package Sistema;
 
+import Dominio.GrafoMetro;
 import Estructuras.AbbUsuario;
 import Retorno.Retorno;
 
@@ -7,7 +8,8 @@ public class Sistema implements ISistema{
 
     private AbbUsuario usuarios;
     private int maxPuntos;
-    
+    private int codigoEstacion;
+    private GrafoMetro metro;
     
     @Override
     public Retorno inicializarSistema(int maxPuntos) {
@@ -16,6 +18,7 @@ public class Sistema implements ISistema{
         if(maxPuntos > 0) {
            this.usuarios = new AbbUsuario();
            this.maxPuntos = maxPuntos;
+           this.metro = new GrafoMetro(maxPuntos);
         }else {
             retorno.resultado = retorno.resultado.ERROR_1;
         }
@@ -75,12 +78,27 @@ public class Sistema implements ISistema{
         return retorno;
     }
 
-    /*@Override
+    @Override
     public Retorno registrarEstacion(Double coordX, Double coordY, String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Retorno retorno = new Retorno();
+        if (codigoEstacion == maxPuntos) {
+            retorno.resultado = retorno.resultado.ERROR_1;
+            return retorno;
+        }
+        //recorrer las estacionesUsadas y preguntar si existe una estacion con las coordX y coordY
+        if (metro.estaEstacion(coordX,coordY)) {
+            retorno.resultado = retorno.resultado.ERROR_2;
+            return retorno;
+        }
+        boolean registro = metro.agregarEstacion(nombre,coordX,coordY);
+        if (registro) {
+            retorno.resultado = retorno.resultado.OK;
+            return retorno;
+        }
+        return retorno;
     }
 
-    @Override
+   /* @Override
     public Retorno registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int metros, int minutos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
