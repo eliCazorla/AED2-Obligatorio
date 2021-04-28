@@ -15,9 +15,9 @@ public class Obligatorio {
         System.out.println("registrarUsuario: " + sistema.registrarUsuario("3.123.456-5","Usuario4").resultado);
         System.out.println("registrarUsuario: " + sistema.registrarUsuario("0.523.456-5","Usuario1").resultado);
         System.out.println("listarUsuarios: " + sistema.listarUsuarios().valorString);
-        System.out.println("buscarUsuario " + sistema.buscarUsuario("4.123.456-5").resultado);
-        System.out.println("buscarUsuario " + sistema.buscarUsuario("4.123.456-5").valorEntero);
-        System.out.println("buscarUsuario " + sistema.buscarUsuario("4.123.456-5").valorString);
+        System.out.println("buscarUsuario " + sistema.buscarUsuario("0.523.456-5").resultado);
+        System.out.println("buscarUsuario " + sistema.buscarUsuario("0.523.456-5").valorEntero);
+        System.out.println("buscarUsuario " + sistema.buscarUsuario("0.523.456-5").valorString);
     }
     
 }

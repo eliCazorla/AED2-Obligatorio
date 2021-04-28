@@ -100,10 +100,10 @@ public class AbbUsuario {
         }
         else{
             if (compararValor(cedula, nodo.getCedula())) {
-                return pertenece(nodo.getIzq(),cedula,veces++);
+                return pertenece(nodo.getIzq(),cedula,++veces);
             }
             else{
-                return pertenece(nodo.getDer(),cedula,veces++);
+                return pertenece(nodo.getDer(),cedula,++veces);
             }
         }
     }
