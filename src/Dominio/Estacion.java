@@ -5,11 +5,14 @@ public class Estacion {
     private double coordX;
     private double coordY;
     private int codigo; //posicion en el vector;
+    private boolean existe;
 
-    public Estacion(String nombre, double coordX, double coordY) {
+    public Estacion(String nombre, double coordX, double coordY, int codigo) {
         this.nombre = nombre;
         this.coordX = coordX;
         this.coordY = coordY;
+        this.codigo = codigo;
+        this.existe = false;
     }
     
     public String getNombre() {
@@ -35,6 +38,21 @@ public class Estacion {
     public void setCoordY(double coordY) {
         this.coordY = coordY;
     }
+
+    public boolean getExiste() {
+        return existe;
+    }
+
+    public void setExiste(boolean existe) {
+        this.existe = existe;
+    }
+    
+    
+
+    boolean existeEstacionXCoordenadas(Double coordX, Double coordY) {
+        return this.getCoordX() == coordX && this.getCoordY() == coordY;
+    }
+    
     
     
 }

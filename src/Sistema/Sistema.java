@@ -8,8 +8,8 @@ public class Sistema implements ISistema{
 
     private AbbUsuario usuarios;
     private int maxPuntos;
-    private int codigoEstacion;
-    private GrafoMetro metro;
+    private int codigoEstacion = 1;
+    public GrafoMetro metro;
     
     @Override
     public Retorno inicializarSistema(int maxPuntos) {
@@ -85,16 +85,13 @@ public class Sistema implements ISistema{
             retorno.resultado = retorno.resultado.ERROR_1;
             return retorno;
         }
-        //recorrer las estacionesUsadas y preguntar si existe una estacion con las coordX y coordY
         if (metro.estaEstacion(coordX,coordY)) {
             retorno.resultado = retorno.resultado.ERROR_2;
             return retorno;
         }
-        boolean registro = metro.agregarEstacion(nombre,coordX,coordY);
-        if (registro) {
-            retorno.resultado = retorno.resultado.OK;
-            return retorno;
-        }
+        metro.agregarEstacion(nombre,coordX,coordY, codigoEstacion);
+        retorno.resultado = retorno.resultado.OK;
+        codigoEstacion++;
         return retorno;
     }
 
