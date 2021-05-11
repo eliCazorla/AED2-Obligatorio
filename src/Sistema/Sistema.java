@@ -8,7 +8,7 @@ public class Sistema implements ISistema{
 
     private AbbUsuario usuarios;
     private int maxPuntos;
-    private int codigoEstacion = 1;
+    private int codigoEstacion = 0;
     public GrafoMetro metro;
     
     @Override
@@ -89,18 +89,31 @@ public class Sistema implements ISistema{
             retorno.resultado = retorno.resultado.ERROR_2;
             return retorno;
         }
+        codigoEstacion++;
         metro.agregarEstacion(nombre,coordX,coordY, codigoEstacion);
         retorno.resultado = retorno.resultado.OK;
-        codigoEstacion++;
         return retorno;
     }
 
-   /* @Override
+    @Override
     public Retorno registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int metros, int minutos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Retorno retorno = new Retorno();
+        if (metros <= 0) {
+            retorno.resultado = retorno.resultado.ERROR_1;
+            return retorno;
+        }
+        if (minutos <= 0) {
+            retorno.resultado = retorno.resultado.ERROR_2;
+            return retorno;
+        }
+        if(!metro.estaEstacion(coordXi, coordYi) || !metro.estaEstacion(coordXf, coordYf)){
+            retorno.resultado = retorno.resultado.ERROR_3;
+            return retorno;
+        }
+        return retorno;
     }
 
-    @Override
+    /*@Override
     public Retorno evacuacionEmergencia(Double coordXi, Double coordYi, int metros) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

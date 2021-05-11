@@ -14,6 +14,14 @@ public class Estacion {
         this.codigo = codigo;
         this.existe = false;
     }
+
+    public Estacion() {
+        this.nombre = null;
+        this.coordX = 0;
+        this.coordY = 0;
+        this.codigo = 0;
+        this.existe = false;
+    }
     
     public String getNombre() {
         return nombre;

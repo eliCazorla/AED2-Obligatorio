@@ -12,6 +12,10 @@ public class GrafoMetro {
         this.matrizAdy = new Via [cantEstaciones+1][cantEstaciones+1];
         this.estacionesUsadas = new Estacion [cantEstaciones+1];
         this.size = 0;
+         
+        for (int i = 1; i <= cantEstaciones; i++) {
+            this.estacionesUsadas[i] = new Estacion();
+        }
         
         for (int i = 1; i <= cantEstaciones; i++) {
             for (int j = 1; j <= cantEstaciones; j++) {
