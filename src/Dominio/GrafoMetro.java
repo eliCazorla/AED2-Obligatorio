@@ -70,6 +70,24 @@ public class GrafoMetro {
        estacion.setExiste(true);
        this.getEstacionesUsadas()[codigoEstacion] = estacion;
     }
+    
+    public void agregarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int metros, int minutos) {
+        Via via = new Via(metros, minutos);
+        int codigoEstacionI = this.getCodigoEstacionXCoordenadas(coordXi, coordYi);
+        int codigoEstacionF = this.getCodigoEstacionXCoordenadas(coordXf, coordYf);
+        this.getMatrizAdy()[codigoEstacionI][codigoEstacionF] = via;
+        this.getMatrizAdy()[codigoEstacionF][codigoEstacionI] = via;
+    }
+
+    private int getCodigoEstacionXCoordenadas(Double coordX, Double coordY) {
+        for (int i = 1; i <= cantEstaciones; i++) {
+            Estacion estacion = this.getEstacionesUsadas()[i];
+            if(estacion.existeEstacionXCoordenadas(coordX, coordY)) {
+                return estacion.getCodigo();
+            }
+        }
+        return -1;
+    }
    
     
 }

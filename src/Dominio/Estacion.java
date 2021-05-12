@@ -54,6 +54,10 @@ public class Estacion {
     public void setExiste(boolean existe) {
         this.existe = existe;
     }
+
+    public int getCodigo() {
+        return codigo;
+    }
     
     
 

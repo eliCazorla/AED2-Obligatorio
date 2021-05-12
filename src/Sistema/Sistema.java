@@ -110,6 +110,8 @@ public class Sistema implements ISistema{
             retorno.resultado = retorno.resultado.ERROR_3;
             return retorno;
         }
+        metro.agregarTramo(coordXi, coordYi, coordXf, coordYf, metros, minutos);
+        retorno.resultado = retorno.resultado.OK;
         return retorno;
     }
 
