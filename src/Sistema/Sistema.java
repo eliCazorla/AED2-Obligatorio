@@ -32,37 +32,47 @@ public class Sistema implements ISistema{
         retorno.resultado = retorno.resultado.OK;
         this.maxPuntos = 0;
         this.usuarios = null;
+        this.metro = null;
         return retorno;
     }
 
     @Override
     public Retorno registrarUsuario(String cedula, String nombre) {
-        //validar cedula.
-        //Retorno existeUsuario = buscarUsuario(cedula);
         Retorno retorno = new Retorno();
-        retorno.resultado = retorno.resultado.OK;
-        boolean inserto = usuarios.insertar(cedula, nombre);
-        if (inserto) {
+        if (!validarCedula(cedula)) {
+            retorno.resultado = retorno.resultado.ERROR_1;
             return retorno;
         }
+        Retorno existeUsuario = buscarUsuario(cedula);
+        if (existeUsuario.resultado == retorno.resultado.OK) {
+            retorno.resultado = retorno.resultado.ERROR_2;
+            return retorno;
+        }
+        usuarios.insertar(cedula, nombre);
+        retorno.resultado = retorno.resultado.OK;
         return retorno;
     }
 
    @Override
     public Retorno buscarUsuario(String cedula) {
         Retorno retorno = new Retorno();
-        /*if (!validarCedula(cedula)) {
+        if (!validarCedula(cedula)) {
            retorno.resultado = retorno.resultado.ERROR_1;
-        }*/
-        retorno.resultado = retorno.resultado.ERROR_2;
-        retorno.valorString = "El usuario no está registrado.";
+           retorno.valorEntero = -1;
+           retorno.valorString = "La cédula ingresada no es válida.";
+           return retorno;
+        }
         int pertenece = usuarios.pertenece(cedula);
         if (pertenece >= 0) {
            retorno.resultado = retorno.resultado.OK;
            String usuario = usuarios.buscarPorCedula(cedula);
            retorno.valorString = usuario;
+           retorno.valorEntero = pertenece;
+           return retorno;
         }
-        retorno.valorEntero = pertenece;
+        retorno.resultado = retorno.resultado.ERROR_2;
+        retorno.valorString = "El usuario no está registrado.";
+        retorno.valorEntero = -1;
         return retorno;
     }
     
@@ -130,4 +140,11 @@ public class Sistema implements ISistema{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     */
+    
+    public boolean validarCedula(String cedula){
+        if (cedula.matches("[0-9].[0-9]{3}.[0-9]{3}-[0-9]")) {
+            return true;
+        }
+        return false;
+    }
 }

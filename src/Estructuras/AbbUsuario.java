@@ -19,10 +19,9 @@ public class AbbUsuario {
         this.raiz = raiz;
     }
         
-    public boolean insertar(String cedula, String nombre) {
+    public void insertar(String cedula, String nombre) {
         NodoAbbUsuario insertado = insertar(cedula, nombre, this.getRaiz());
         this.setRaiz(insertado);
-        return true;
     } 
     
     private NodoAbbUsuario insertar(String cedula, String nombre, NodoAbbUsuario nodo) {
@@ -69,27 +68,6 @@ public class AbbUsuario {
         }
         return pertenece(this.raiz,cedula,0);
     }
-    
-    /*private int pertenece(NodoAbbUsuario nodo, String cedula){
-        int veces = 0;
-        if (nodo == null) {
-            return Integer.MIN_VALUE;
-        }
-        if (nodo.getCedula() == cedula){
-            return veces;
-        }
-        else{
-            if (compararValor(cedula, nodo.getCedula())) {
-                veces++;
-                veces += pertenece(nodo.getIzq(),cedula);
-            }
-            else{
-                veces++;
-                veces += pertenece(nodo.getDer(),cedula);
-            }
-        }
-        return veces;
-    }*/
     
     private int pertenece(NodoAbbUsuario nodo, String cedula, int veces){
         if (nodo == null) {
