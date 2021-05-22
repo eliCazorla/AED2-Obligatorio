@@ -1,5 +1,7 @@
 package Dominio;
 
+import Retorno.Retorno;
+
 public class GrafoMetro {
     public Via [][] matrizAdy;
     public Estacion [] estacionesUsadas;
@@ -73,19 +75,87 @@ public class GrafoMetro {
     
     public void agregarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int metros, int minutos) {
         Via via = new Via(metros, minutos);
-        int codigoEstacionI = this.getCodigoEstacionXCoordenadas(coordXi, coordYi);
-        int codigoEstacionF = this.getCodigoEstacionXCoordenadas(coordXf, coordYf);
+        int codigoEstacionI = this.getEstacionXCoordenadas(coordXi, coordYi).getCodigo();
+        int codigoEstacionF = this.getEstacionXCoordenadas(coordXf, coordYf).getCodigo();
         this.getMatrizAdy()[codigoEstacionI][codigoEstacionF] = via;
         this.getMatrizAdy()[codigoEstacionF][codigoEstacionI] = via;
     }
-
-    private int getCodigoEstacionXCoordenadas(Double coordX, Double coordY) {
+    
+    public Estacion getEstacionXCoordenadas(Double coordX, Double coordY) {
         for (int i = 1; i <= cantEstaciones; i++) {
             Estacion estacion = this.getEstacionesUsadas()[i];
             if(estacion.esLaEstacion(coordX, coordY)) {
-                return estacion.getCodigo();
+                return estacion;
             }
         }
-        return -1;
-    }  
+        return null;
+    }
+
+    public Retorno caminoMinimo(Estacion origen, Estacion destino) {
+        Retorno retorno = new Retorno();
+        boolean[] visitados = new boolean[this.cantEstaciones+1];
+        int[] costos = new int[this.cantEstaciones+1];
+        Estacion[] predecesores = new Estacion[this.cantEstaciones+1];
+        
+        visitados[origen.getCodigo()] = true;
+        
+        for (int i = 1; i <= this.cantEstaciones; i++) {
+            if (i!=origen.getCodigo()) {
+                if (sonAdyacentes(origen.getCodigo(), i)) {
+                    costos[i] = matrizAdy[origen.getCodigo()][i].getLongitud();
+                    predecesores[i] = origen;
+                }else{
+                    costos[i] = Integer.MAX_VALUE;
+                }
+            }
+        }
+        
+        for (int i = 1; i <= this.cantEstaciones; i++) {
+            Estacion w = estacionConDistanciaMasCortaNoVisitado(costos, visitados);
+            if (w == destino) {
+                retorno.valorEntero = costos[w.getCodigo()];
+                //retorno.valorString = caminoDesdeOrigenADestino(origen,destino,predecesores);
+                retorno.resultado = retorno.resultado.OK;
+            }
+            visitados[w.getCodigo()] = true;
+            for (int j = 1; j <= this.cantEstaciones; j++) {
+                if (sonAdyacentes(w.getCodigo(), j) && !visitados[j]) {
+                    if (costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getLongitud() < costos[j]) {
+                        costos[j] = costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getLongitud();
+                        predecesores[j] = w;
+                    }
+                }
+            }
+        }
+        //HAY QUE MEJORAR CON UN WHILE
+        return retorno;
+    }
+    
+    public boolean sonAdyacentes(int a, int b){
+        return this.matrizAdy[a][b].getExiste();
+    }
+
+    private Estacion estacionConDistanciaMasCortaNoVisitado(int[] costos, boolean[] visitados) {
+        int minimo = Integer.MAX_VALUE;
+        int posicion = 0;
+        for (int i = 1; i < costos.length; i++) {
+            if (costos[i] != 0) {
+                if (costos[i] < minimo && !visitados[i]) {
+                    minimo = costos[i]; 
+                    posicion = i;
+                }
+            }
+        }
+        Estacion estacion = estacionXCodigo(posicion);
+        return estacion;
+    }
+    
+    private Estacion estacionXCodigo(int codigo){
+        for (int i = 1; i <= this.cantEstaciones; i++) {
+            if (estacionesUsadas[i].getCodigo() == codigo) {
+                return estacionesUsadas[i];
+            }
+        }
+        return null;
+    }
 }

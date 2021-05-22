@@ -1,5 +1,6 @@
 package Sistema;
 
+import Dominio.Estacion;
 import Dominio.GrafoMetro;
 import Estructuras.AbbUsuario;
 import Retorno.Retorno;
@@ -125,21 +126,29 @@ public class Sistema implements ISistema{
         return retorno;
     }
 
-    /*@Override
-    public Retorno evacuacionEmergencia(Double coordXi, Double coordYi, int metros) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public Retorno evacuacionEmergencia(Double coordXi, Double coordYi, int metros) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     @Override
     public Retorno caminoMinimo(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Retorno retorno = new Retorno();
+        if(!metro.estaEstacion(coordXi, coordYi) || !metro.estaEstacion(coordXf, coordYf)){
+            retorno.resultado = retorno.resultado.ERROR_1;
+            return retorno;
+        }
+        Estacion estacion1 = metro.getEstacionXCoordenadas(coordXi, coordYi);
+        Estacion estacion2 = metro.getEstacionXCoordenadas(coordXf, coordYf);
+        Retorno caminoMinimo = metro.caminoMinimo(estacion1, estacion2);
+        return caminoMinimo;
     }
 
-    @Override
-    public Retorno dibujarMapa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    */
+//    @Override
+//    public Retorno dibujarMapa() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+    
     
     public boolean validarCedula(String cedula){
         if (cedula.matches("[0-9].[0-9]{3}.[0-9]{3}-[0-9]")) {

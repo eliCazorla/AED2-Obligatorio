@@ -58,8 +58,6 @@ public class Estacion {
     public int getCodigo() {
         return codigo;
     }
-    
-    
 
     boolean esLaEstacion(Double coordX, Double coordY) {
         return this.getCoordX() == coordX && this.getCoordY() == coordY;
