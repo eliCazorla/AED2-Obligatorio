@@ -58,7 +58,7 @@ public class GrafoMetro {
 
     public boolean estaEstacion(Double coordX, Double coordY) {
         for (int i = 1; i <= cantEstaciones; i++) {
-            if (this.getEstacionesUsadas()[i].existeEstacionXCoordenadas(coordX, coordY)) {
+            if (this.getEstacionesUsadas()[i].esLaEstacion(coordX, coordY)) {
                 return true;
             }
         }
@@ -82,7 +82,7 @@ public class GrafoMetro {
     private int getCodigoEstacionXCoordenadas(Double coordX, Double coordY) {
         for (int i = 1; i <= cantEstaciones; i++) {
             Estacion estacion = this.getEstacionesUsadas()[i];
-            if(estacion.existeEstacionXCoordenadas(coordX, coordY)) {
+            if(estacion.esLaEstacion(coordX, coordY)) {
                 return estacion.getCodigo();
             }
         }

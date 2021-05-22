@@ -61,7 +61,7 @@ public class Estacion {
     
     
 
-    boolean existeEstacionXCoordenadas(Double coordX, Double coordY) {
+    boolean esLaEstacion(Double coordX, Double coordY) {
         return this.getCoordX() == coordX && this.getCoordY() == coordY;
     }
     
