@@ -110,12 +110,15 @@ public class GrafoMetro {
             }
         }
         
-        for (int i = 1; i <= this.cantEstaciones; i++) {
+        boolean encontroDestino = false;
+        
+        while(!encontroDestino){
             Estacion w = estacionConDistanciaMasCortaNoVisitado(costos, visitados);
             if (w == destino) {
                 retorno.valorEntero = costos[w.getCodigo()];
-                //retorno.valorString = caminoDesdeOrigenADestino(origen,destino,predecesores);
+                retorno.valorString = caminoDesdeOrigenADestino(origen,destino,predecesores);
                 retorno.resultado = retorno.resultado.OK;
+                encontroDestino = true;
             }
             visitados[w.getCodigo()] = true;
             for (int j = 1; j <= this.cantEstaciones; j++) {
@@ -127,7 +130,6 @@ public class GrafoMetro {
                 }
             }
         }
-        //HAY QUE MEJORAR CON UN WHILE
         return retorno;
     }
     
@@ -157,5 +159,23 @@ public class GrafoMetro {
             }
         }
         return null;
+    }
+
+    private String caminoDesdeOrigenADestino(Estacion origen, Estacion destino, Estacion[] predecesores) {
+        //recorrer hasta que el predecesor sea el origen
+        boolean esElOrigen = false;
+        int contador = 0;
+        String[] lista = new String[predecesores.length];
+        String recorrido = "";
+        while(!esElOrigen){
+            if (predecesores[destino.getCodigo()] == origen) {
+                esElOrigen = true;
+                //faltaria agregar el string
+            }else{
+                //faltaria agregar el string
+                destino = predecesores[destino.getCodigo()];              
+            }
+        }
+        return recorrido;
     }
 }
