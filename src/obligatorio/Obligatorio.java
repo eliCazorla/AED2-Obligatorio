@@ -34,8 +34,8 @@ public class Obligatorio {
         //Centenario y ORT
         System.out.println("agregarTramo " + sistema.registrarTramo(-34.89433078341417, -56.15283963105457,-34.90329736867486, -56.190495769312,
                 3810,15).resultado);
-//        System.out.println("agregarTramo " + sistema.registrarTramo(-12.2, -56.15283963105457,-34.90329736867486, -58.190495769312,
-//                3810,15).resultado);
+        System.out.println("agregarTramo " + sistema.registrarTramo(-34.89433078341417, -56.15283963105457,-34.90329736867486, -56.190495769312,
+                5000,37).resultado);
 //        
         //Ort y Parque
         System.out.println("agregarTramo " + sistema.registrarTramo(-34.90329736867486, -56.190495769312,-34.884237654255045, -56.15876197338285,

@@ -1,9 +1,10 @@
 package Dominio;
 
+import Estructuras.ListaVia;
 import Retorno.Retorno;
 
 public class GrafoMetro {
-    public Via [][] matrizAdy;
+    public ListaVia [][] matrizAdy;
     public Estacion [] estacionesUsadas;
     int size;//tamaño actual estaciones
     int cantEstaciones;//maxima cantidad de estaciones permitidas
@@ -11,7 +12,7 @@ public class GrafoMetro {
     
     public GrafoMetro(int cantEstaciones) {
         this.cantEstaciones = cantEstaciones;
-        this.matrizAdy = new Via [cantEstaciones+1][cantEstaciones+1];
+        this.matrizAdy = new ListaVia [cantEstaciones+1][cantEstaciones+1];
         this.estacionesUsadas = new Estacion [cantEstaciones+1];
         this.size = 0;
          
@@ -21,16 +22,16 @@ public class GrafoMetro {
         
         for (int i = 1; i <= cantEstaciones; i++) {
             for (int j = 1; j <= cantEstaciones; j++) {
-                this.matrizAdy[i][j] = new Via();
+                this.matrizAdy[i][j] = new ListaVia();
             }
         }
     }
     
-    public Via[][] getMatrizAdy() {
+    public ListaVia[][] getMatrizAdy() {
         return matrizAdy;
     }
 
-    public void setMatrizAdy(Via[][] matrizAdy) {
+    public void setMatrizAdy(ListaVia[][] matrizAdy) {
         this.matrizAdy = matrizAdy;
     }
 
@@ -77,8 +78,8 @@ public class GrafoMetro {
         Via via = new Via(metros, minutos);
         int codigoEstacionI = this.getEstacionXCoordenadas(coordXi, coordYi).getCodigo();
         int codigoEstacionF = this.getEstacionXCoordenadas(coordXf, coordYf).getCodigo();
-        this.getMatrizAdy()[codigoEstacionI][codigoEstacionF] = via;
-        this.getMatrizAdy()[codigoEstacionF][codigoEstacionI] = via;
+        this.getMatrizAdy()[codigoEstacionI][codigoEstacionF].agregarInicio(via);
+        this.getMatrizAdy()[codigoEstacionF][codigoEstacionI].agregarInicio(via);
     }
     
     public Estacion getEstacionXCoordenadas(Double coordX, Double coordY) {
@@ -102,7 +103,7 @@ public class GrafoMetro {
         for (int i = 1; i <= this.cantEstaciones; i++) {
             if (i!=origen.getCodigo()) {
                 if (sonAdyacentes(origen.getCodigo(), i)) {
-                    costos[i] = matrizAdy[origen.getCodigo()][i].getLongitud();
+                    costos[i] = matrizAdy[origen.getCodigo()][i].getLongitudMinima();
                     predecesores[i] = origen;
                 }else{
                     costos[i] = Integer.MAX_VALUE;
@@ -116,15 +117,15 @@ public class GrafoMetro {
             Estacion w = estacionConDistanciaMasCortaNoVisitado(costos, visitados);
             if (w == destino) {
                 retorno.valorEntero = costos[w.getCodigo()];
-                retorno.valorString = caminoDesdeOrigenADestino(origen,destino,predecesores);
+                retorno.valorString = caminoDesdeOrigenADestino(origen,destino,predecesores, costos);
                 retorno.resultado = retorno.resultado.OK;
                 encontroDestino = true;
             }
             visitados[w.getCodigo()] = true;
             for (int j = 1; j <= this.cantEstaciones; j++) {
                 if (sonAdyacentes(w.getCodigo(), j) && !visitados[j]) {
-                    if (costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getLongitud() < costos[j]) {
-                        costos[j] = costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getLongitud();
+                    if (costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getLongitudMinima() < costos[j]) {
+                        costos[j] = costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getLongitudMinima();
                         predecesores[j] = w;
                     }
                 }
@@ -161,7 +162,7 @@ public class GrafoMetro {
         return null;
     }
 
-    private String caminoDesdeOrigenADestino(Estacion origen, Estacion destino, Estacion[] predecesores) {
+    private String caminoDesdeOrigenADestino(Estacion origen, Estacion destino, Estacion[] predecesores, int[] costos) {
         //recorrer hasta que el predecesor sea el origen
         boolean esElOrigen = false;
         int contador = 0;
@@ -170,7 +171,6 @@ public class GrafoMetro {
         while(!esElOrigen){
             if (predecesores[destino.getCodigo()] == origen) {
                 esElOrigen = true;
-                //faltaria agregar el string
             }else{
                 //faltaria agregar el string
                 destino = predecesores[destino.getCodigo()];              
