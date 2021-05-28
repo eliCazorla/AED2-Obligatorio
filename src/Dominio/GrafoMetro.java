@@ -1,5 +1,6 @@
 package Dominio;
 
+import Estructuras.ListaCamino;
 import Estructuras.ListaVia;
 import Retorno.Retorno;
 
@@ -117,7 +118,7 @@ public class GrafoMetro {
             Estacion w = estacionConDistanciaMasCortaNoVisitado(costos, visitados);
             if (w == destino) {
                 retorno.valorEntero = costos[w.getCodigo()];
-                retorno.valorString = caminoDesdeOrigenADestino(origen,destino,predecesores, costos);
+                retorno.valorString = caminoDesdeOrigenADestino(origen,destino,predecesores);
                 retorno.resultado = retorno.resultado.OK;
                 encontroDestino = true;
             }
@@ -162,20 +163,25 @@ public class GrafoMetro {
         return null;
     }
 
-    private String caminoDesdeOrigenADestino(Estacion origen, Estacion destino, Estacion[] predecesores, int[] costos) {
+    private String caminoDesdeOrigenADestino(Estacion origen, Estacion destino, Estacion[] predecesores) {
         //recorrer hasta que el predecesor sea el origen
         boolean esElOrigen = false;
-        int contador = 0;
-        String[] lista = new String[predecesores.length];
-        String recorrido = "";
+        ListaCamino camino = new ListaCamino();
+        camino.agregarInicio(destino);
+        //String recorrido = destino.getNombre();
         while(!esElOrigen){
             if (predecesores[destino.getCodigo()] == origen) {
                 esElOrigen = true;
+                //recorrido = "<" + predecesores[destino.getCodigo()].getCoordX() +  "> <" + predecesores[destino.getCodigo()].getCoordY() + ">" + recorrido;
+                camino.agregarInicio(predecesores[destino.getCodigo()]);
             }else{
                 //faltaria agregar el string
-                destino = predecesores[destino.getCodigo()];              
+                destino = predecesores[destino.getCodigo()]; 
+                //recorrido = destino.getNombre() +  " " + recorrido;
+                camino.agregarInicio(destino);
             }
         }
-        return recorrido;
+        //return recorrido;
+        return "";
     }
 }
