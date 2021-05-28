@@ -33,11 +33,13 @@ public class Obligatorio {
 //        System.out.println("agregarEstacion " + sistema.registrarEstacion(-34.89433078341417, -56.15283963105457, "Estadio Centenario").resultado);
         //Centenario y ORT
         System.out.println("agregarTramo " + sistema.registrarTramo(-34.89433078341417, -56.15283963105457,-34.90329736867486, -56.190495769312,
-                3810,15).resultado);
-        System.out.println("agregarTramo " + sistema.registrarTramo(-34.89433078341417, -56.15283963105457,-34.90329736867486, -56.190495769312,
                 5000,37).resultado);
+        System.out.println("agregarTramo " + sistema.registrarTramo(-34.89433078341417, -56.15283963105457,-34.90329736867486, -56.190495769312,
+                3815,15).resultado);
 //        
         //Ort y Parque
+        System.out.println("agregarTramo " + sistema.registrarTramo(-34.90329736867486, -56.190495769312,-34.884237654255045, -56.15876197338285,
+                4500,8).resultado);
         System.out.println("agregarTramo " + sistema.registrarTramo(-34.90329736867486, -56.190495769312,-34.884237654255045, -56.15876197338285,
                 2000,8).resultado);
         
@@ -56,11 +58,10 @@ public class Obligatorio {
         //CDS y ORT
         System.out.println("agregarTramo " + sistema.registrarTramo(-34.79665694300997, -56.067230087300224,-34.90329736867486, -56.190495769312,
                 3500,30).resultado);
-        
-        
-//        Via[][] hola = sistema.metro.matrizAdy;
-//        int a = 0;
-        sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224);
+        //ORT A CDS
+        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).resultado);
+        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).valorEntero);
+        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).valorString);
     }
     
 }

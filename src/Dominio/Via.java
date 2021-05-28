@@ -4,7 +4,8 @@ public class Via {
     private int longitud;
     private int tiempo;
     private boolean existe;
-
+    private int id;
+    
     public Via() {
         this.longitud = 0;
         this.tiempo = 0;
@@ -36,6 +37,16 @@ public class Via {
     public boolean getExiste() {
         return existe;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     
     
 }

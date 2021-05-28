@@ -38,6 +38,7 @@ public class ListaVia {
     }
 
     public void agregarInicio(Via via) {
+        via.setId(id);
         NodoVia nuevo = new NodoVia(this.getId(), via);
         if(this.getInicio()==null){
             this.setInicio(nuevo);
@@ -59,18 +60,19 @@ public class ListaVia {
         return false;
     }
 
-    public int getLongitudMinima() {
+    public Via getViaConLongitudMinima() {
         int minimo = Integer.MAX_VALUE;
+        Via via = null;
         if(this.getInicio()!=null){
             NodoVia aux = this.getInicio();
             while(aux != null){
                 if(aux.getVia().getLongitud() < minimo){
                     minimo = aux.getVia().getLongitud();
+                    via = aux.getVia();
                 }
                 aux = aux.getSig();
             }
-            return minimo;
         }
-        return -1;
+        return via;
     }
 }

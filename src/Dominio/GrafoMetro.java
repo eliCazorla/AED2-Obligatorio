@@ -2,6 +2,7 @@ package Dominio;
 
 import Estructuras.ListaCamino;
 import Estructuras.ListaVia;
+import Estructuras.NodoEstacion;
 import Retorno.Retorno;
 
 public class GrafoMetro {
@@ -104,7 +105,7 @@ public class GrafoMetro {
         for (int i = 1; i <= this.cantEstaciones; i++) {
             if (i!=origen.getCodigo()) {
                 if (sonAdyacentes(origen.getCodigo(), i)) {
-                    costos[i] = matrizAdy[origen.getCodigo()][i].getLongitudMinima();
+                    costos[i] = matrizAdy[origen.getCodigo()][i].getViaConLongitudMinima().getLongitud();
                     predecesores[i] = origen;
                 }else{
                     costos[i] = Integer.MAX_VALUE;
@@ -125,8 +126,8 @@ public class GrafoMetro {
             visitados[w.getCodigo()] = true;
             for (int j = 1; j <= this.cantEstaciones; j++) {
                 if (sonAdyacentes(w.getCodigo(), j) && !visitados[j]) {
-                    if (costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getLongitudMinima() < costos[j]) {
-                        costos[j] = costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getLongitudMinima();
+                    if (costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getViaConLongitudMinima().getLongitud() < costos[j]) {
+                        costos[j] = costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getViaConLongitudMinima().getLongitud();
                         predecesores[j] = w;
                     }
                 }
@@ -138,7 +139,11 @@ public class GrafoMetro {
     public boolean sonAdyacentes(int a, int b){
         return this.matrizAdy[a][b].getExiste();
     }
-
+    
+    public Via getVia(int a, int b){
+        return this.matrizAdy[a][b].getViaConLongitudMinima();
+    }
+    
     private Estacion estacionConDistanciaMasCortaNoVisitado(int[] costos, boolean[] visitados) {
         int minimo = Integer.MAX_VALUE;
         int posicion = 0;
@@ -168,20 +173,34 @@ public class GrafoMetro {
         boolean esElOrigen = false;
         ListaCamino camino = new ListaCamino();
         camino.agregarInicio(destino);
-        //String recorrido = destino.getNombre();
         while(!esElOrigen){
             if (predecesores[destino.getCodigo()] == origen) {
                 esElOrigen = true;
-                //recorrido = "<" + predecesores[destino.getCodigo()].getCoordX() +  "> <" + predecesores[destino.getCodigo()].getCoordY() + ">" + recorrido;
                 camino.agregarInicio(predecesores[destino.getCodigo()]);
             }else{
-                //faltaria agregar el string
                 destino = predecesores[destino.getCodigo()]; 
-                //recorrido = destino.getNombre() +  " " + recorrido;
                 camino.agregarInicio(destino);
             }
         }
-        //return recorrido;
-        return "";
+        return caminoString(camino);
+    }
+
+    private String caminoString(ListaCamino camino) {
+        NodoEstacion aux = camino.getInicio();
+        String retorno = "";
+        while(aux != null){
+            if (aux == camino.getUltimo()) {
+                retorno += "<" + aux.getEstacion().getCoordX() + ">;<" + aux.getEstacion().getCoordY() + ">;<"+ aux.getEstacion().getNombre() + ">";
+            }else{
+                retorno += "<" + aux.getEstacion().getCoordX() + ">;<" + aux.getEstacion().getCoordY() + ">;<" + idTramo(aux.getEstacion(),aux.getSig().getEstacion()) + ">|";
+            }
+            aux = aux.getSig();
+        }
+        return retorno;
+    }
+
+    private String idTramo(Estacion a, Estacion b) {
+        Via via = this.getVia(a.getCodigo(), b.getCodigo());
+        return a.getNombre() + "_" + b.getNombre() + "_" + via.getId();
     }
 }
