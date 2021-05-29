@@ -153,10 +153,12 @@ public class Sistema implements ISistema{
         return caminoMinimo;
     }
 
-//    @Override
-//    public Retorno dibujarMapa() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    @Override
+    public Retorno dibujarMapa() {
+        Retorno retorno = new Retorno();
+        
+        return retorno;
+    }
     
     
     public boolean validarCedula(String cedula){

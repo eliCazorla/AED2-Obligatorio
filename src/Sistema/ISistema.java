@@ -12,5 +12,5 @@ public interface ISistema {
     Retorno registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int metros, int minutos);
     Retorno evacuacionEmergencia(Double coordXi, Double coordYi, int metros);
     Retorno caminoMinimo(Double coordXi, Double coordYi, Double coordXf, Double coordYf);
-//    Retorno dibujarMapa();
+    Retorno dibujarMapa();
 }
