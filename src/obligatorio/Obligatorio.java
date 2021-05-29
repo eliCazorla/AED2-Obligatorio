@@ -59,9 +59,13 @@ public class Obligatorio {
         System.out.println("agregarTramo " + sistema.registrarTramo(-34.79665694300997, -56.067230087300224,-34.90329736867486, -56.190495769312,
                 3500,30).resultado);
         //ORT A CDS
-        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).resultado);
-        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).valorEntero);
-        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).valorString);
+//        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).resultado);
+//        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).valorEntero);
+//        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).valorString);
+        
+        //EVACUACION
+        System.out.println("evacuacion" + sistema.evacuacionEmergencia(-34.90329736867486, -56.190495769312, 1500).resultado);
+        System.out.println("evacuacion" + sistema.evacuacionEmergencia(-34.90329736867486, -56.190495769312, 1500).valorString);
     }
     
 }

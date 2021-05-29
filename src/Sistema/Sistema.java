@@ -126,10 +126,19 @@ public class Sistema implements ISistema{
         return retorno;
     }
 
-//    @Override
-//    public Retorno evacuacionEmergencia(Double coordXi, Double coordYi, int metros) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    @Override
+    public Retorno evacuacionEmergencia(Double coordXi, Double coordYi, int metros) {
+        Retorno retorno = new Retorno();
+        if(!metro.estaEstacion(coordXi, coordYi)) {
+            retorno.resultado = retorno.resultado.ERROR_1;
+            return retorno;
+        }
+        Estacion estacion = metro.getEstacionXCoordenadas(coordXi, coordYi);
+        String estacionesComprendidas = metro.getEstacionesComprendidas(estacion, metros);
+        retorno.resultado = retorno.resultado.OK;
+        retorno.valorString = estacionesComprendidas;
+        return retorno;
+    }
 
     @Override
     public Retorno caminoMinimo(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {

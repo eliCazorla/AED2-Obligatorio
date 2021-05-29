@@ -203,4 +203,45 @@ public class GrafoMetro {
         Via via = this.getVia(a.getCodigo(), b.getCodigo());
         return a.getNombre() + "_" + b.getNombre() + "_" + via.getId();
     }
+
+    public String getEstacionesComprendidas(Estacion estacion, int metros) {
+        boolean[] visitados = new boolean[this.cantEstaciones+1];
+        int[] costos = new int[this.cantEstaciones+1];
+        Estacion[] predecesores = new Estacion[this.cantEstaciones+1];
+        String estaciones = estacion.getNombre() + "|";
+            
+        visitados[estacion.getCodigo()] = true;
+        for (int i = 1; i <= this.cantEstaciones; i++) {
+            if (i != estacion.getCodigo()) {
+                if (this.sonAdyacentes(i, estacion.getCodigo())) {
+                    costos[i] = matrizAdy[estacion.getCodigo()][i].getViaConLongitudMinima().getLongitud();
+                    predecesores[i] = estacion;
+                }else{
+                    costos[i] = Integer.MAX_VALUE;
+                }
+            }
+        }
+        
+        boolean seEvacuo = false;
+        while(!seEvacuo){
+           Estacion w = this.estacionConDistanciaMasCortaNoVisitado(costos, visitados);
+            if (costos[w.getCodigo()] > metros) {
+                seEvacuo = true;
+            }else{
+                estaciones += w.getNombre() + "|";
+            
+                visitados[w.getCodigo()] = true;
+                for (int i = 1; i <= this.cantEstaciones; i++) {
+                    if (sonAdyacentes(w.getCodigo(),i) && !visitados[i]) {
+                        if (costos[w.getCodigo()] + matrizAdy[w.getCodigo()][i].getViaConLongitudMinima().getLongitud() < costos[i]) {
+                             costos[i] = costos[w.getCodigo()] + matrizAdy[w.getCodigo()][i].getViaConLongitudMinima().getLongitud();
+                             predecesores[i] = w;
+                        }
+                    }
+                }
+            }
+        }    
+             
+        return estaciones;
+    }
 }
