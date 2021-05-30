@@ -223,7 +223,8 @@ public class GrafoMetro {
         }
         
         boolean seEvacuo = false;
-        while(!seEvacuo){
+        int cantEstacionesRecorridas = 1;
+        while(!seEvacuo && cantEstacionesRecorridas!=this.getCantEstaciones()){
            Estacion w = this.estacionConDistanciaMasCortaNoVisitado(costos, visitados);
             if (costos[w.getCodigo()] > metros) {
                 seEvacuo = true;
@@ -240,8 +241,19 @@ public class GrafoMetro {
                     }
                 }
             }
+            cantEstacionesRecorridas++;
         }    
              
         return estaciones;
+    }
+
+    public String armarMapa() {
+        String retorno = "http://maps.googleapis.com/maps/api/staticmap?center=Montevideo,Uruguay&zoom=12&size=1500x1500&maptype=roadmap";
+        for (int i = 1; i <= this.getCantEstaciones(); i++) {
+            Estacion estacion = this.getEstacionesUsadas()[i];
+            retorno += "&markers=color:red%7Clabel:" + estacion.getCodigo() + "%7C" + estacion.getCoordX() + "," + estacion.getCoordY();
+        }
+        retorno += "&sensor=false&key=AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";
+        return retorno;
     }
 }

@@ -156,7 +156,8 @@ public class Sistema implements ISistema{
     @Override
     public Retorno dibujarMapa() {
         Retorno retorno = new Retorno();
-        
+        retorno.valorString = metro.armarMapa();
+        retorno.resultado = retorno.resultado.OK;
         return retorno;
     }
     

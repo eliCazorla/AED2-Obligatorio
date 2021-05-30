@@ -29,8 +29,8 @@ public class Obligatorio {
         System.out.println("agregarEstacion " + sistema.registrarEstacion(-34.90329736867486, -56.190495769312, "Universidad ORT Uruguay Montevideo").resultado);
         System.out.println("agregarEstacion " + sistema.registrarEstacion(-34.884237654255045, -56.15876197338285, "Estadio Gran Parque Central").resultado);
         System.out.println("agregarEstacion " + sistema.registrarEstacion(-34.89433078341417, -56.15283963105457, "Estadio Centenario").resultado);
-        System.out.println("agregarEstacion " + sistema.registrarEstacion(-34.79665694300997, -56.067230087300224, "Estadio Campeon del Siglo").resultado);
-//        System.out.println("agregarEstacion " + sistema.registrarEstacion(-34.89433078341417, -56.15283963105457, "Estadio Centenario").resultado);
+        System.out.println("agregarEstacion " + sistema.registrarEstacion(-34.92100284907383, -56.153394886788945, "Club Bigua").resultado);
+        //System.out.println("agregarEstacion " + sistema.registrarEstacion(-34.89433078341417, -56.15283963105457, "Estadio Centenario").resultado);
         //Centenario y ORT
         System.out.println("agregarTramo " + sistema.registrarTramo(-34.89433078341417, -56.15283963105457,-34.90329736867486, -56.190495769312,
                 5000,37).resultado);
@@ -47,25 +47,29 @@ public class Obligatorio {
         System.out.println("agregarTramo " + sistema.registrarTramo(-34.884237654255045, -56.15876197338285,-34.89433078341417, -56.15283963105457,
                 1500,6).resultado);
         
-        //Centenario y CDS
-        System.out.println("agregarTramo " + sistema.registrarTramo(-34.89433078341417, -56.15283963105457,-34.79665694300997, -56.067230087300224,
+        //Centenario y BIGUA
+        System.out.println("agregarTramo " + sistema.registrarTramo(-34.89433078341417, -56.15283963105457,-34.92100284907383, -56.153394886788945,
                 1800,12).resultado);
         
-        //CDS y Parque
-        System.out.println("agregarTramo " + sistema.registrarTramo(-34.79665694300997, -56.067230087300224,-34.884237654255045, -56.15876197338285,
+        //BIGUA y Parque
+        System.out.println("agregarTramo " + sistema.registrarTramo(-34.92100284907383, -56.153394886788945,-34.884237654255045, -56.15876197338285,
                 500,8).resultado);
         
-        //CDS y ORT
-        System.out.println("agregarTramo " + sistema.registrarTramo(-34.79665694300997, -56.067230087300224,-34.90329736867486, -56.190495769312,
+        //BIGUA y ORT
+        System.out.println("agregarTramo " + sistema.registrarTramo(-34.92100284907383, -56.153394886788945,-34.90329736867486, -56.190495769312,
                 3500,30).resultado);
-        //ORT A CDS
-//        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).resultado);
-//        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).valorEntero);
-//        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.79665694300997, -56.067230087300224).valorString);
-        
+        //ORT A BIGUA
+        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.92100284907383, -56.153394886788945).resultado);
+        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.92100284907383, -56.153394886788945).valorEntero);
+        System.out.println("camino minimo" + sistema.caminoMinimo(-34.90329736867486, -56.190495769312, -34.92100284907383, -56.153394886788945).valorString);
+////        
         //EVACUACION
-        System.out.println("evacuacion" + sistema.evacuacionEmergencia(-34.90329736867486, -56.190495769312, 1500).resultado);
-        System.out.println("evacuacion" + sistema.evacuacionEmergencia(-34.90329736867486, -56.190495769312, 1500).valorString);
+        System.out.println("evacuacion" + sistema.evacuacionEmergencia(-34.90329736867486, -56.190495769312, 3500).resultado);
+        System.out.println("evacuacion" + sistema.evacuacionEmergencia(-34.90329736867486, -56.190495769312, 3500).valorString);
+////        
+        //MAPA
+        System.out.println("mapa" + sistema.dibujarMapa().resultado);
+        System.out.println(sistema.dibujarMapa().valorString);
     }
     
 }
