@@ -82,6 +82,7 @@ public class Sistema implements ISistema{
         Retorno retorno = new Retorno();
         if (usuarios.getRaiz() != null) {
             retorno.valorString = usuarios.listar();
+            retorno.resultado = retorno.resultado.OK;
             return retorno;
         }
         retorno.resultado = retorno.resultado.ERROR_1;
@@ -163,7 +164,7 @@ public class Sistema implements ISistema{
     
     
     public boolean validarCedula(String cedula){
-        if (cedula.matches("[0-9].[0-9]{3}.[0-9]{3}-[0-9]")) {
+        if (cedula.matches("[0-9][.][0-9]{3}[.][0-9]{3}-[0-9]")) {
             return true;
         }
         return false;
