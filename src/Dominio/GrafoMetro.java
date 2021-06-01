@@ -123,12 +123,14 @@ public class GrafoMetro {
                 retorno.resultado = retorno.resultado.OK;
                 encontroDestino = true;
             }
-            visitados[w.getCodigo()] = true;
-            for (int j = 1; j <= this.cantEstaciones; j++) {
-                if (sonAdyacentes(w.getCodigo(), j) && !visitados[j]) {
-                    if (costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getViaConLongitudMinima().getLongitud() < costos[j]) {
-                        costos[j] = costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getViaConLongitudMinima().getLongitud();
-                        predecesores[j] = w;
+            if(!encontroDestino) {
+                visitados[w.getCodigo()] = true;
+                for (int j = 1; j <= this.cantEstaciones; j++) {
+                    if (sonAdyacentes(w.getCodigo(), j) && !visitados[j]) {
+                        if (costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getViaConLongitudMinima().getLongitud() < costos[j]) {
+                            costos[j] = costos[w.getCodigo()] + matrizAdy[w.getCodigo()][j].getViaConLongitudMinima().getLongitud();
+                            predecesores[j] = w;
+                        }
                     }
                 }
             }
