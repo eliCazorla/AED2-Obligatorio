@@ -171,7 +171,6 @@ public class GrafoMetro {
     }
 
     private String caminoDesdeOrigenADestino(Estacion origen, Estacion destino, Estacion[] predecesores) {
-        //recorrer hasta que el predecesor sea el origen
         boolean esElOrigen = false;
         ListaCamino camino = new ListaCamino();
         camino.agregarInicio(destino);
@@ -190,8 +189,8 @@ public class GrafoMetro {
     private String caminoString(ListaCamino camino) {
         NodoEstacion aux = camino.getInicio();
         String retorno = "";
-        while(aux != null){
-            retorno += "<" + aux.getEstacion().getCoordX() + ">;<" + aux.getEstacion().getCoordY() + ">;<" + idTramo(aux.getEstacion(),aux.getSig().getEstacion()) + ">|";
+        while(aux.getSig() != null){
+            retorno += aux.getEstacion().getCoordX() + ";" + aux.getEstacion().getCoordY() + ";" + aux.getSig().getEstacion().getCoordX() + ";" + aux.getSig().getEstacion().getCoordY() + ";" + idTramo(aux.getEstacion(),aux.getSig().getEstacion()) + "|";
             aux = aux.getSig();
         }
         return retorno;
@@ -224,7 +223,7 @@ public class GrafoMetro {
         int cantEstacionesRecorridas = 1;
         while(!seEvacuo && cantEstacionesRecorridas!=this.getCantEstaciones()){
            Estacion w = this.estacionConDistanciaMasCortaNoVisitado(costos, visitados);
-            if (costos[w.getCodigo()] > metros) {
+            if (costos[w.getCodigo()] >= metros) {
                 seEvacuo = true;
             }else{
                 estaciones += w.getNombre() + "|";
