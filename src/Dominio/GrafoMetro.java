@@ -120,7 +120,6 @@ public class GrafoMetro {
             if (w == destino) {
                 retorno.valorEntero = costos[w.getCodigo()];
                 retorno.valorString = caminoDesdeOrigenADestino(origen,destino,predecesores);
-                retorno.valorString = retorno.valorString.substring(0, retorno.valorString.length() - 1);
                 retorno.resultado = retorno.resultado.OK;
                 encontroDestino = true;
             }
@@ -191,7 +190,11 @@ public class GrafoMetro {
         NodoEstacion aux = camino.getInicio();
         String retorno = "";
         while(aux.getSig() != null){
-            retorno += aux.getEstacion().getCoordX() + ";" + aux.getEstacion().getCoordY() + ";" + aux.getSig().getEstacion().getCoordX() + ";" + aux.getSig().getEstacion().getCoordY() + ";" + idTramo(aux.getEstacion(),aux.getSig().getEstacion()) + "|";
+            if(aux.getSig().getSig() == null) {
+                retorno += aux.getEstacion().getCoordX() + ";" + aux.getEstacion().getCoordY() + ";" + aux.getSig().getEstacion().getCoordX() + ";" + aux.getSig().getEstacion().getCoordY() + ";" + idTramo(aux.getEstacion(),aux.getSig().getEstacion());
+            }else {
+                retorno += aux.getEstacion().getCoordX() + ";" + aux.getEstacion().getCoordY() + ";" + aux.getSig().getEstacion().getCoordX() + ";" + aux.getSig().getEstacion().getCoordY() + ";" + idTramo(aux.getEstacion(),aux.getSig().getEstacion()) + "|";
+            }
             aux = aux.getSig();
         }
         return retorno;
