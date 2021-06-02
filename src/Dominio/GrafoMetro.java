@@ -206,7 +206,7 @@ public class GrafoMetro {
         boolean[] visitados = new boolean[this.cantEstaciones+1];
         int[] costos = new int[this.cantEstaciones+1];
         Estacion[] predecesores = new Estacion[this.cantEstaciones+1];
-        String estaciones = estacion.getNombre() + "|";
+        String estaciones = "";
             
         visitados[estacion.getCodigo()] = true;
         for (int i = 1; i <= this.cantEstaciones; i++) {
@@ -224,7 +224,7 @@ public class GrafoMetro {
         int cantEstacionesRecorridas = 1;
         while(!seEvacuo && cantEstacionesRecorridas!=this.getCantEstaciones()){
            Estacion w = this.estacionConDistanciaMasCortaNoVisitado(costos, visitados);
-            if (costos[w.getCodigo()] >= metros) {
+            if (costos[w.getCodigo()] > metros) {
                 seEvacuo = true;
             }else{
                 estaciones += w.getNombre() + "|";
