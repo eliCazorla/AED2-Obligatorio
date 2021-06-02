@@ -82,6 +82,7 @@ public class Sistema implements ISistema{
         Retorno retorno = new Retorno();
         if (usuarios.getRaiz() != null) {
             retorno.valorString = usuarios.listar();
+            retorno.valorString = retorno.valorString.substring(0, retorno.valorString.length()-1);
             retorno.resultado = retorno.resultado.OK;
             return retorno;
         }
@@ -137,7 +138,7 @@ public class Sistema implements ISistema{
         Estacion estacion = metro.getEstacionXCoordenadas(coordXi, coordYi);
         String estacionesComprendidas = metro.getEstacionesComprendidas(estacion, metros);
         retorno.resultado = retorno.resultado.OK;
-        retorno.valorString = estacionesComprendidas;
+        retorno.valorString = estacionesComprendidas.substring(0, estacionesComprendidas.length()-1);
         return retorno;
     }
 

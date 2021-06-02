@@ -242,7 +242,7 @@ public class GrafoMetro {
             cantEstacionesRecorridas++;
         }    
              
-        return estaciones.substring(0, estaciones.length()-1);
+        return estaciones;
     }
 
     public String armarMapa() {
