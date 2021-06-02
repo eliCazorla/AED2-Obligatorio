@@ -120,6 +120,7 @@ public class GrafoMetro {
             if (w == destino) {
                 retorno.valorEntero = costos[w.getCodigo()];
                 retorno.valorString = caminoDesdeOrigenADestino(origen,destino,predecesores);
+                retorno.valorString = retorno.valorString.substring(0, retorno.valorString.length() - 1);
                 retorno.resultado = retorno.resultado.OK;
                 encontroDestino = true;
             }
@@ -241,7 +242,7 @@ public class GrafoMetro {
             cantEstacionesRecorridas++;
         }    
              
-        return estaciones;
+        return estaciones.substring(0, estaciones.length()-1);
     }
 
     public String armarMapa() {
