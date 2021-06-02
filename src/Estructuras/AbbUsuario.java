@@ -66,7 +66,7 @@ public class AbbUsuario {
         if (this.raiz == null) {
             return -1;
         }
-        return pertenece(this.raiz,cedula,0);
+        return pertenece(this.raiz,cedula,1);
     }
     
     private int pertenece(NodoAbbUsuario nodo, String cedula, int veces){

@@ -191,11 +191,7 @@ public class GrafoMetro {
         NodoEstacion aux = camino.getInicio();
         String retorno = "";
         while(aux != null){
-            if (aux == camino.getUltimo()) {
-                retorno += "<" + aux.getEstacion().getCoordX() + ">;<" + aux.getEstacion().getCoordY() + ">;<"+ aux.getEstacion().getNombre() + ">";
-            }else{
-                retorno += "<" + aux.getEstacion().getCoordX() + ">;<" + aux.getEstacion().getCoordY() + ">;<" + idTramo(aux.getEstacion(),aux.getSig().getEstacion()) + ">|";
-            }
+            retorno += "<" + aux.getEstacion().getCoordX() + ">;<" + aux.getEstacion().getCoordY() + ">;<" + idTramo(aux.getEstacion(),aux.getSig().getEstacion()) + ">|";
             aux = aux.getSig();
         }
         return retorno;
