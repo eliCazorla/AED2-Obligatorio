@@ -254,7 +254,7 @@ public class GrafoMetro {
             Estacion estacion = this.getEstacionesUsadas()[i];
             retorno += "&markers=color:red%7Clabel:" + estacion.getCodigo() + "%7C" + estacion.getCoordX() + "," + estacion.getCoordY();
         }
-        retorno += "&sensor=false&key=AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";
+        retorno += "&sensor=false&key=AIzaSyBTC1gW4ziuJBc6_EdVqvzDgusl34hIr6A";
         return retorno;
     }
 }
